@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import { useState } from "react";
+// import "./styles.css";
+
+export default function App() {
+  const [input, setInput] = useState("");
+  const [data, setData] = useState([]);
+
+  const changeData = (e) => {
+    setInput(e.target.value);
+  };
+
+  const change = () => {
+    setData([...data, input]);
+    setInput("");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          jothi Murugan demo app</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <input type="text" value={input} onChange={(e) => changeData(e)} />
+      <button onClick={change}>Add</button>
+      {data.map((data) => (
+        <li>{data}</li>
+      ))}
+    </>
   );
 }
 
-export default App;
